@@ -16,7 +16,7 @@ code {
     max-height: 500px;
     min-height: 250px;
     overflow-y: scroll;
-    border: 1px solid grey;
+    border: 1px solid black;
 }
 
 .cart-head {
@@ -118,7 +118,7 @@ code {
     float: right;
 }
 
-.subTotal, .cart-head, .cartTotalWrapper, .cartDiscountWrapper {
+.subTotal, .cart-head, .cartTotalWrapper, .cartDiscountWrapper, .tenderedWrapper, .totalDueWrapper {
     padding: 10px;
 }
 
@@ -126,7 +126,7 @@ code {
     border-bottom: 1px solid black;
 }
 
-.cartTotalWrapper {
+.cartTotalWrapper, .totalDueWrapper {
     background-color: #2a3c59;
     color: white;
     font-weight: 700;
@@ -150,6 +150,10 @@ code {
 
 label {
     display: inline-grid !important;
+}
+.title h4{
+    font-size:18px;
+    margin-top:8px;
 }
 
 #price, #quantity, #discount {
@@ -210,8 +214,15 @@ td.prodName {
 .payment-summary {
     min-width: 100%;
     min-height: 200px;
+    padding:8px;
 }
-
+.payment-method{
+    border-bottom:1px solid grey;
+    padding: 5px;
+}
+.payment-method-value{
+    font-weight: 700;
+}
 .col-5 {
     width: 43% !important;
 }
@@ -228,4 +239,20 @@ td.prodName {
 .modal-dialogue {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px !important;
 }
-
+.cashQuickButtons{
+    width: 50%;
+    float: left;
+}
+.cashButton {
+    padding: 15px;
+    margin: 5px;
+    color: white;
+    background: #2a3c59;
+    border: 0px;
+}
+.btn-success {
+    background: green!important;
+}
+h3{
+    font-size: 20px!important;
+}
