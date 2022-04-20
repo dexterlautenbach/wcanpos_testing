@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import CheckoutHeader from "./checkoutHeader";
 import CheckoutBody from "./checkoutBody/checkoutBody";
 import PaymentMethods from "./paymentMethods";
+import EndTransaction from "./endTransaction/endtransaction";
 
 
 class Checkout extends Component {
@@ -79,14 +80,11 @@ class Checkout extends Component {
                                             getTotal={this.getTotal}
                                             getTotalDue={this.getTotalDue}
                                             tendered={this.state.tendered}
-                                            paymentMethods ={this.state.paymentMethods}
+                                            paymentMethods={this.state.paymentMethods}
 
                                         />
-                                        <PaymentMethods
-                                            getTotalDue={this.getTotalDue}
-                                            handleTendered={this.handleTendered}
-                                            handlePaymentMethods={this.handlePaymentMethods}
-                                        />
+                                        {this.testForTotalDue()}
+
                                     </div>
                                 </div>
                             </div>
@@ -98,6 +96,23 @@ class Checkout extends Component {
             </div>
 
         );
+    }
+
+    testForTotalDue = () =>{
+        const totalDue = Number(this.getTotalDue()).toFixed(2);
+        const actions = totalDue > 0 ?
+            <PaymentMethods
+                getTotalDue={this.getTotalDue}
+                handleTendered={this.handleTendered}
+                handlePaymentMethods={this.handlePaymentMethods}
+            />
+         :
+            <EndTransaction
+
+            />
+
+        ;
+        return actions;
     }
 
 }
