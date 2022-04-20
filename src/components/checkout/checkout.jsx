@@ -108,7 +108,7 @@ class Checkout extends Component {
             />
          :
             <EndTransaction
-
+                cartList = {this.props.cartList}
             />
 
         ;
