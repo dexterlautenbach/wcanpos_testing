@@ -27,6 +27,12 @@ class EndTransaction extends Component {
             set_paid : true,
             line_items : lineItems,
             status : 'completed',
+            meta_data:[
+                {
+                    key : 'payment_amount',
+                    value: 500
+                }
+            ]
         };
 
     }
