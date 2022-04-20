@@ -114,6 +114,7 @@ class Checkout extends Component {
             <EndTransaction
                 cartList = {this.props.cartList}
                 orderID = {this.state.orderID}
+                setorderID = {this.handleOrderCreation}
             />
 
         ;
