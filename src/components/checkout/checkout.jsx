@@ -54,6 +54,7 @@ class Checkout extends Component {
         let paymentMethods = this.state.paymentMethods;
         paymentMethods.push(method);
         this.setState({paymentMethods: paymentMethods});
+        //test on the change
     }
 
 
