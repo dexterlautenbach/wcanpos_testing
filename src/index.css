@@ -280,9 +280,10 @@ h3{
     width:100%;
     max-width:100%;
 }
-/* @media print {
+@media print {
     body{
         width: 100%;
+        padding: 5%;;
         height: initial !important;
         overflow: initial !important;
         -webkit-print-color-adjust: exact;
@@ -292,12 +293,25 @@ h3{
         display: inherit;
         width:300px;
         position: relative;
+        padding: 5% 13%;
     }
-    .company-info, .receipt-info{
+    .company-info{
         text-align: center;
     }
+    .info-info, .bottom-info, .payment-total, .total-paid, .change-paid{
+        width: 50%;
+        float: right;
+        text-align: right;
+    }
+    .info-title, .bottom-title, .total-title, .change-title {
+        width: 50%;
+        float: left;
+    }
+    .receipt-footer{
+        text-align: center;
+    }
+    .product-table-header {
+        border-bottom: 1px solid black;
+        margin-top:25px;
+    }
 }
-@page {
-    size: auto;
-    margin: 20mm;
-  } */
