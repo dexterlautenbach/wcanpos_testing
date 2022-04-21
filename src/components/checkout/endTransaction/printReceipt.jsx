@@ -60,7 +60,7 @@ class PrintReceipt extends Component {
                         </tbody>
                     </table>
                     <div className="subtotal-wrapper">
-                        <div className="bottom-title">Date</div>
+                        <div className="bottom-title">Subtotal</div>
                         <div className="bottom-info">${this.props.getSubtotal().toFixed(2)}</div>
                     </div>
                     <div className="HST-wrapper">
@@ -68,7 +68,7 @@ class PrintReceipt extends Component {
                         <div className="bottom-info">${this.props.getHST().toFixed(2)}</div>
                     </div>
                     <div className="Total-wrapper">
-                        <div className="bottom-title">HST (13%)</div>
+                        <div className="bottom-title">Total</div>
                         <div className="bottom-info">${this.props.getTotal().toFixed(2)}</div>
                     </div>
 

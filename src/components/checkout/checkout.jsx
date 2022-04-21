@@ -67,6 +67,15 @@ class Checkout extends Component {
         this.setState({paymentMethods : []});
         this.setState({tendered : 0});
         this.setState({orderID : 0});
+        this.props.resetClearCheckout();
+    }
+
+    componentDidUpdate() {
+        if (this.props.clearCheckout === true){
+            this.handleNewOrderCheckout()
+            console.log('cleared cart');
+        };
+
     }
 
 

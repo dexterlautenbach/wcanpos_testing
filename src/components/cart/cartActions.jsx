@@ -5,10 +5,13 @@ class CartActions extends Component {
 
     render() {
         return (
-            <button onClick={this.props.handleCheckoutClick} className="btn-success btn-lg">Checkout</button>
+            <div className="cart-actions">
+                <button onClick={this.props.handleNewOrderClick} className="btn-danger btn-lg float-start">Clear Cart</button>
+                <button onClick={this.props.handleCheckoutClick} className="btn-success btn-lg float-end">Checkout</button>
+            </div>
 
         );
-    }
+    };
 
 }
 

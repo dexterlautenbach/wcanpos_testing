@@ -27,7 +27,7 @@ class EndSale extends Component {
                 if (data.id > 0) {
                     console.log(data);
                     this.props.handleNewOrderClick();
-                    this.props.handleNewOrderCheckout();
+                   // this.props.handleNewOrderCheckout();
                 }
             });
     }

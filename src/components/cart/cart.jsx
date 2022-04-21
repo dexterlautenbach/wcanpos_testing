@@ -43,6 +43,7 @@ class Cart extends Component {
                 <div className="cartActionsWrapper">
                     <CartActions
                         handleCheckoutClick = {this.props.handleCheckoutClick}
+                        handleNewOrderClick = {this.props.handleNewOrderClick}
                     />
                 </div>
             </div>

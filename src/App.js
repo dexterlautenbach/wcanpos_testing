@@ -13,6 +13,7 @@ class App extends Component {
         updateSelectedProduct: false,
         cart : [],
         checkout : false,
+        clearCheckout : false,
 
 
 
@@ -58,7 +59,12 @@ class App extends Component {
         this.setState({cart : []});
         this.setState({selectedProductId : 0});
         this.setState({updateSelectedProduct : false});
+        this.setState({clearCheckout : true});
 
+    }
+
+    resetClearCheckout =()=>{
+        this.setState({clearCheckout : false})
     }
 
     render() {
@@ -83,11 +89,14 @@ class App extends Component {
                     handleCheckoutClick = {this.handleCheckoutClick}
                     cartList={this.state.cart}
                     handleNewOrderClick = {this.handleNewOrderClick}
+                    clearCheckout={this.state.clearCheckout}
+                    resetClearCheckout = {this.resetClearCheckout}
                 />
                 <div className="pos-main">
                     <Cart
                         cartList={this.state.cart}
                         handleCheckoutClick = {this.handleCheckoutClick}
+                        handleNewOrderClick = {this.handleNewOrderClick}
                     />
                     <Categories
                         handleProductSelection = {this.handleProductSelection}
