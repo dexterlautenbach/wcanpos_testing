@@ -259,6 +259,7 @@ td.prodName {
 }
 .btn-success {
     background: green!important;
+    float:right;
 }
 h3{
     font-size: 20px!important;
@@ -268,10 +269,13 @@ h3{
     display: block;
     text-align: center;
     width: 300px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 .twc-logo{
     width: 200px;
-    display: block;
+    display: initial;
     text-align: center;
+}
+.wrapper{
+    width:100%;
 }
