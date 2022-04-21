@@ -280,9 +280,10 @@ h3{
     width:100%;
     max-width:100%;
 }
-/* @media print {
+@media print {
     body{
         width: 100%;
+        padding: 5%;;
         height: initial !important;
         overflow: initial !important;
         -webkit-print-color-adjust: exact;
@@ -293,11 +294,7 @@ h3{
         width:300px;
         position: relative;
     }
-    .company-info, .receipt-info{
+    .company-info{
         text-align: center;
     }
 }
-@page {
-    size: auto;
-    margin: 20mm;
-  } */
