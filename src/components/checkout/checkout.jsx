@@ -58,6 +58,10 @@ class Checkout extends Component {
         //test on the change
     }
 
+    handleOrderCreation = (id) => {
+        this.setState({orderID: id});
+    }
+
 
     render() {
         return (
@@ -108,7 +112,10 @@ class Checkout extends Component {
             />
          :
             <EndTransaction
-
+                cartList = {this.props.cartList}
+                orderID = {this.state.orderID}
+                setorderID = {this.handleOrderCreation}
+                paymentMethods = {this.state.paymentMethods}
             />
 
         ;

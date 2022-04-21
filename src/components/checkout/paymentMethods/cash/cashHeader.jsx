@@ -8,7 +8,7 @@ class CashHeader extends Component {
         return (
             <div className="modal-header">
                 <div>
-                    <h4 className="modal-title" id="staticBackdropLabel">Cash Purchase - {(Math.round(this.props.getTotalDue()*20)/20).toFixed(2)}</h4>
+                    <h4 className="modal-title" id="staticBackdropLabel">Cash Purchase - ${(Math.round(this.props.getTotalDue()*20)/20).toFixed(2)}</h4>
                 </div>
                 <div>
                     <button onClick={() => this.props.handleCash(false)}
