@@ -1,5 +1,9 @@
 import React, {Component} from "react";
 
+/** This is the component that will create the receipt
+ *
+ */
+
 class PrintReceipt extends Component {
     state = {};
 
