@@ -280,7 +280,7 @@ h3{
     width:100%;
     max-width:100%;
 }
-@media print {
+/* @media print {
     body{
         width: 100%;
         height: initial !important;
@@ -300,4 +300,4 @@ h3{
 @page {
     size: auto;
     margin: 20mm;
-  }
+  } */
