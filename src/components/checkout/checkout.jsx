@@ -62,6 +62,12 @@ class Checkout extends Component {
         this.setState({orderID: id});
     }
 
+    handleNewOrderCheckout = () => {
+        this.setState({paymentMethods : []});
+        this.setState({tendered : 0});
+        this.setState({orderID : 0});
+    }
+
 
     render() {
         return (
@@ -116,6 +122,8 @@ class Checkout extends Component {
                 orderID = {this.state.orderID}
                 setorderID = {this.handleOrderCreation}
                 paymentMethods = {this.state.paymentMethods}
+                handleNewOrderClick = {this.props.handleNewOrderClick}
+                handleNewOrderCheckout = {this.handleNewOrderCheckout}
             />
 
         ;

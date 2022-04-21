@@ -9,8 +9,7 @@ import Checkout from "./components/checkout/checkout";
 class App extends Component {
     state = {
         productList: [],
-        productID: 0,
-        selectedProductID: 8188,
+        selectedProductID: 0,
         updateSelectedProduct: false,
         cart : [],
         checkout : false,
@@ -54,6 +53,14 @@ class App extends Component {
 
     }
 
+    handleNewOrderClick = () =>{
+        this.setState({checkout : false});
+        this.setState({cart : []});
+        this.setState({selectedProductId : 0});
+        this.setState({updateSelectedProduct : false});
+
+    }
+
     render() {
         return (
             <div className="App">
@@ -75,6 +82,7 @@ class App extends Component {
                     checkout = {this.state.checkout}
                     handleCheckoutClick = {this.handleCheckoutClick}
                     cartList={this.state.cart}
+                    handleNewOrderClick = {this.handleNewOrderClick}
                 />
                 <div className="pos-main">
                     <Cart

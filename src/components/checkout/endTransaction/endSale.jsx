@@ -6,6 +6,8 @@ class EndSale extends Component {
     /** when this button is clicked, it will update the sale in woocommerce with all of the correct information of the sale.
      * this will allow the end user to go back and add both items and payment methods to the sale.
      *
+     * New order function will fire all the way from APP.js
+     *
      */
 
     updateWooOrder = () => {
@@ -22,7 +24,11 @@ class EndSale extends Component {
         fetch('https://test.wateringcanworkshops.com/wp-json/wc/v3/orders/' + this.props.orderID + '?consumer_key=ck_181949d267953fb08db6575c5aefcc09b6592080&consumer_secret=cs_4c327415a7ad72aafd384f806ca35b3a932d35f7', requestOptions)
             .then(response => response.json())
             .then((data) => {
-                console.log(data);
+                if (data.id > 0) {
+                    console.log(data);
+                    this.props.handleNewOrderClick();
+                    this.props.handleNewOrderCheckout();
+                }
             });
     }
 

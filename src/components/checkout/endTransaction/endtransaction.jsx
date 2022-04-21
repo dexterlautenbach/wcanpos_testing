@@ -73,7 +73,8 @@ class EndTransaction extends Component {
                     cartList = {this.props.cartList}
                     orderID = {this.props.orderID}
                     paymentMethods = {this.props.paymentMethods}
-
+                    handleNewOrderClick = {this.props.handleNewOrderClick}
+                    handleNewOrderCheckout = {this.props.handleNewOrderCheckout}
                 />;
         } else {
             buttons =
