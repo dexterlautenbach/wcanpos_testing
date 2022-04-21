@@ -222,6 +222,13 @@ td.prodName {
 }
 .payment-method-value{
     font-weight: 700;
+    width:50%;
+    float: right;
+    text-align: right;
+}
+.payment-method-name{
+    width: 49%;
+    display: contents;
 }
 .col-5 {
     width: 43% !important;
