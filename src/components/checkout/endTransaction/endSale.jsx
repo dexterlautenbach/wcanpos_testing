@@ -5,9 +5,8 @@ class EndSale extends Component {
 
     /** when this button is clicked, it will update the sale in woocommerce with all of the correct information of the sale.
      * this will allow the end user to go back and add both items and payment methods to the sale.
+     *
      */
-
-
 
     createWooOrder ()  {
         // POST request using fetch with set headers
