@@ -125,6 +125,11 @@ class Checkout extends Component {
                 paymentMethods = {this.state.paymentMethods}
                 handleNewOrderClick = {this.props.handleNewOrderClick}
                 handleNewOrderCheckout = {this.handleNewOrderCheckout}
+                getSubtotal = {this.getSubtotal}
+                getHST = {this.getHST}
+                getTotal = {this.getTotal}
+                getTotalDue = {this.getTotalDue}
+                amountTendered = {this.state.tendered}
             />
 
         ;

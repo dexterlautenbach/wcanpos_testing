@@ -48,12 +48,19 @@ class EndTransaction extends Component {
                         }}
                         content={() => this.componentRef}
                     />
-                    {/*<div style={{display: "none"}}>*/}
+                    <div style={{display: "none"}}>
                     <PrintReceipt ref={(el) => (this.componentRef = el)}
                                   orderID={this.props.orderID}
                                   wooOrder={this.state.order}
+                                  cartList = {this.props.cartList}
+                                  getSubtotal = {this.props.getSubtotal}
+                                  getHST = {this.props.getHST}
+                                  getTotal = {this.props.getTotal}
+                                  getTotalDue = {this.props.getTotalDue}
+                                  paymentMethods={this.props.paymentMethods}
+                                  amountTendered = {this.props.amountTendered}
                     />
-                    {/*</div>*/}
+                    </div>
 
                     <EndSale
                         cartList={this.props.cartList}
