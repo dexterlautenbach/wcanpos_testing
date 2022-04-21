@@ -115,6 +115,7 @@ class Checkout extends Component {
                 cartList = {this.props.cartList}
                 orderID = {this.state.orderID}
                 setorderID = {this.handleOrderCreation}
+                paymentMethods = {this.state.paymentMethods}
             />
 
         ;
