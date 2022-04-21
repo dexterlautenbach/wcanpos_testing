@@ -5,6 +5,7 @@ class PrintReceipt extends Component {
 
 
     render() {
+
         return (
             <div className="receipt-wrapper">
                 <div className="logo-div">
@@ -18,7 +19,7 @@ class PrintReceipt extends Component {
                         905-562-0088
                     </div>
                     <div className="company-info">
-                        www.thewateringcan.cas
+                        www.thewateringcan.ca
                     </div>
                 </div>
 
@@ -32,9 +33,75 @@ class PrintReceipt extends Component {
                         <div className="info-info">{this.props.wooOrder.date_created}</div>
                     </div>
                 </div>
+
+                <div className="receipt-body">
+                    <table className="product-table">
+                        <thead>
+                        <tr className="product-table-header">
+
+                            <th>Description</th>
+                            <th>QTY</th>
+                            <th>Total</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.props.cartList?.map(function (product, i) {
+                            return <tr key={i}>
+                                <td className="prodName">{product.name}<br/>#{product.id} @ {product.price}</td>
+                                <td className="prodQty">{product.quantity}</td>
+                                <td className="prodPrice">${(product.price * product.quantity).toFixed(2)}</td>
+                            </tr>
+                        })}
+                        </tbody>
+                    </table>
+                    <div className="subtotal-wrapper">
+                        <div className="bottom-title">Date</div>
+                        <div className="bottom-info">${this.props.getSubtotal().toFixed(2)}</div>
+                    </div>
+                    <div className="HST-wrapper">
+                        <div className="bottom-title">HST (13%)</div>
+                        <div className="bottom-info">${this.props.getHST().toFixed(2)}</div>
+                    </div>
+                    <div className="Total-wrapper">
+                        <div className="bottom-title">HST (13%)</div>
+                        <div className="bottom-info">${this.props.getTotal().toFixed(2)}</div>
+                    </div>
+
+                    <div className="payments-wrapper">
+                        <div className="payments-title">Payments</div>
+                        {this.props.paymentMethods?.map(function (method, i) {
+                            return <div key={i} className="payment-method-wrapper">
+                                <div className='method-name'>{method.name}</div>
+                                <div className='method-value'>{method.value}</div>
+                            </div>
+                        })}
+
+                        <div className="payment-total">
+                            <div className="total-title">Total Paid</div>
+                            <div className="total-paid">${this.props.amountTendered.toFixed(2)}</div>
+                        </div>
+                        <div className="change">
+                            <div className="change-title">Change Due</div>
+                            <div className="change-paid">${(this.props.getTotalDue()*-1).toFixed(2)}</div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div className="receipt-footer">
+                    Thank you for shopping at The Watering Can
+                    <br/>
+                    HST# 81925 7544 RC0001
+                </div>
+
+
             </div>
         )
     }
+
 
 
 }
