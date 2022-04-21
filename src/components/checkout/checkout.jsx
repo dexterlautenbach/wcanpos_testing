@@ -9,6 +9,7 @@ class Checkout extends Component {
     state = {
         tendered: 0,
         paymentMethods: [],
+        orderID: 123456789,
     };
 
     getSubtotal = () => {

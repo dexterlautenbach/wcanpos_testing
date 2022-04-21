@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import EndSale from "./endSale";
+import ReactToPrint from "react-to-print";
+import PrintReceipt from "./printReceipt";
 
 class EndTransaction extends Component {
     state = {};
@@ -34,34 +36,6 @@ class EndTransaction extends Component {
     }
 
 
-    getOrderData = () => {
-        const lineItems = this.getLineItems();
-        return {
-            payment_method: 'cash',
-            payment_method_title: 'Cash',
-            set_paid: true,
-            line_items: lineItems,
-            status: 'completed',
-            meta_data: [
-                {
-                    key: 'payment_amount',
-                    value: 500
-                }
-            ]
-        };
-
-    }
-
-    getLineItems = () => {
-        let items = []
-        this.props.cartList?.map(item =>
-            items.push({
-                product_id: item.id,
-                quantity: item.quantity
-            })
-        )
-        return items;
-    }
 
 
     render() {
@@ -69,13 +43,22 @@ class EndTransaction extends Component {
         let buttons;
         if (orderID > 0) {
             buttons =
-                <EndSale
-                    cartList = {this.props.cartList}
-                    orderID = {this.props.orderID}
-                    paymentMethods = {this.props.paymentMethods}
-                    handleNewOrderClick = {this.props.handleNewOrderClick}
-                    handleNewOrderCheckout = {this.props.handleNewOrderCheckout}
-                />;
+                <div className="wrapper">
+                    <ReactToPrint
+                        trigger={() =>{return <button className="btn-success btn-lg">Print Receipt</button>}}
+                        content={() => this.componentRef}
+                    />
+                    {/*<div style={{display: "none"}}>*/}
+                        <PrintReceipt ref={(el) => (this.componentRef = el)}/>
+                    {/*</div>*/}
+                </div>;
+            // <EndSale
+            //     cartList = {this.props.cartList}
+            //     orderID = {this.props.orderID}
+            //     paymentMethods = {this.props.paymentMethods}
+            //     handleNewOrderClick = {this.props.handleNewOrderClick}
+            //     handleNewOrderCheckout = {this.props.handleNewOrderCheckout}
+            // />;
         } else {
             buttons =
                 <h3>Fetching Transaction Number</h3>
