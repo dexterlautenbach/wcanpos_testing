@@ -265,6 +265,10 @@ h3{
 }
 .logo-div{
     align-content: center;
+    display: block;
+    text-align: center;
+    width: 300px;
+    border: 1px solid black;
 }
 .twc-logo{
     width: 200px;
