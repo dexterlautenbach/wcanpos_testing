@@ -18,7 +18,7 @@ class PrintReceipt extends Component {
                         905-562-0088
                     </div>
                     <div className="company-info">
-                        www.thewateringcan.cad
+                        www.thewateringcan.cas
                     </div>
                 </div>
 
