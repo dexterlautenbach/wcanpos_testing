@@ -36,8 +36,6 @@ class EndTransaction extends Component {
     }
 
 
-
-
     render() {
         const orderID = this.props.orderID;
         let buttons;
@@ -45,20 +43,26 @@ class EndTransaction extends Component {
             buttons =
                 <div className="wrapper">
                     <ReactToPrint
-                        trigger={() =>{return <button className="btn-success btn-lg">Print Receipt</button>}}
+                        trigger={() => {
+                            return <button className="btn-success btn-lg">Print Receipt</button>
+                        }}
                         content={() => this.componentRef}
                     />
                     {/*<div style={{display: "none"}}>*/}
-                        <PrintReceipt ref={(el) => (this.componentRef = el)}/>
+                    <PrintReceipt ref={(el) => (this.componentRef = el)}
+                                  orderID={this.props.orderID}
+                                  wooOrder={this.state.order}
+                    />
                     {/*</div>*/}
+
+                    <EndSale
+                        cartList={this.props.cartList}
+                        orderID={this.props.orderID}
+                        paymentMethods={this.props.paymentMethods}
+                        handleNewOrderClick={this.props.handleNewOrderClick}
+                        handleNewOrderCheckout={this.props.handleNewOrderCheckout}
+                    />
                 </div>;
-            // <EndSale
-            //     cartList = {this.props.cartList}
-            //     orderID = {this.props.orderID}
-            //     paymentMethods = {this.props.paymentMethods}
-            //     handleNewOrderClick = {this.props.handleNewOrderClick}
-            //     handleNewOrderCheckout = {this.props.handleNewOrderCheckout}
-            // />;
         } else {
             buttons =
                 <h3>Fetching Transaction Number</h3>
