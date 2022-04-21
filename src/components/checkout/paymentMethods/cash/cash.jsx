@@ -39,6 +39,7 @@ class Cash extends Component {
                                             cashTender = {this.state.cashTender}
                                             handleTendered = {this.props.handleTendered}
                                             handlePaymentMethods = {this.props.handlePaymentMethods}
+                                            getTotalDue = {this.props.getTotalDue}
                                             />
                                     </div>
                                 </div>

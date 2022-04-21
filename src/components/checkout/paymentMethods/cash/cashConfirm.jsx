@@ -6,9 +6,15 @@ class CashConfirm extends Component {
     onClick = () => {
         this.props.handleTendered(this.props.cashTender);
         this.props.handleCash(false);
+        const totalDue = (Math.round(this.props.getTotalDue()*20)/20).toFixed(2);
+        let change = this.props.cashTender - totalDue;
+        if (change < 0){ change = 0;}
+        const nickleAdjustment = this.props.getTotalDue() - totalDue;
         const paymentMethod = {
             name: 'Cash',
             value: this.props.cashTender,
+            change: change,
+            cashAdjustment : nickleAdjustment,
         };
         this.props.handlePaymentMethods(paymentMethod);
     }
