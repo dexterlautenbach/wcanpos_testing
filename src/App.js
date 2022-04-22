@@ -67,6 +67,18 @@ class App extends Component {
         this.setState({clearCheckout : false})
     }
 
+    handleCartItemRemoval = (item) => {
+        let newCart = [];
+
+        this.state.cart?.map( (product, i) => {
+            if (i == item){}else{
+                newCart.push(product);
+            }
+        });
+        this.setState({cart:newCart});
+      //  console.log(newCart)
+    }
+
     render() {
         return (
             <div className="App">
@@ -97,6 +109,7 @@ class App extends Component {
                         cartList={this.state.cart}
                         handleCheckoutClick = {this.handleCheckoutClick}
                         handleNewOrderClick = {this.handleNewOrderClick}
+                        handleCartItemRemoval = {this.handleCartItemRemoval}
                     />
                     <Categories
                         handleProductSelection = {this.handleProductSelection}

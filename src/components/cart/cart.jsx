@@ -6,7 +6,6 @@ class Cart extends Component {
     state = {
     };
 
-
     render() {
         return (
             <div className="col-5 mh-50 m-3 float-start">
@@ -24,8 +23,8 @@ class Cart extends Component {
                 <div className="scroll-body">
                     <table className="table table-striped table-sm m-0">
                         <tbody>
-                        {this.props.cartList?.map(function (product, i) {
-                         return   <tr key={i}>
+                        {this.props.cartList?.map( (product, i) => {
+                         return   <tr onDoubleClick={() => this.props.handleCartItemRemoval(i)} key={i}>
                                 <td className="prodName">{product.name}</td>
                                 <td className="prodDiscount">{product.discount}%</td>
                                 <td className="prodQty">{product.quantity}</td>
@@ -49,6 +48,8 @@ class Cart extends Component {
             </div>
         );
     }
+
+
 }
 
 export default Cart;
