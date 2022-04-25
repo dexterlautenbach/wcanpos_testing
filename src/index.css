@@ -248,6 +248,7 @@ td.prodName {
 }
 #staticBackdrop{
     backdrop-filter: blur(10px)!important;
+    color:blue;
 }
 
 .cashQuickButtons{
