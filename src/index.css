@@ -264,23 +264,17 @@ td.prodName {
 h3{
     font-size: 20px!important;
 }
-.logo-div{
-    align-content: center;
-    display: block;
-    text-align: center;
-    width: 300px;
-    /* border: 1px solid black; */
-}
-.twc-logo{
-    width: 200px;
-    display: initial;
-    text-align: center;
-}
+
 .wrapper{
     width:100%;
     max-width:100%;
 }
 @media print {
+    .logo-div{
+        text-align: center!important;
+        width: 100%;
+        display:flex;
+    }
     body{
         width: 100%;
         padding: 5%;;
@@ -290,10 +284,11 @@ h3{
     }
     .twc-logo{
         text-align: center!important;
-        display: inherit;
-        width:300px;
-        position: relative;
-        padding: 5% 13%;
+        width:100%;
+        padding-left: 20%;
+        padding-right:20%;
+        padding-bottom: 3%;
+        display: block;
     }
     .company-info{
         text-align: center;
@@ -314,4 +309,46 @@ h3{
         border-bottom: 1px solid black;
         margin-top:25px;
     }
+
+
+.bottom-title, .method-name, .total-title, .change-title {
+    width: 50%;
+    float: left;
+    text-align: left;
 }
+.bottom-info, .method-value, .total-paid, .change-paid{
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+.payments-title, .change{
+    font-size:18px;
+    font-weight: 700;
+    text-align: left;
+}
+.subtotal-wrapper{
+    border-top: 1px solid black;
+}
+tr {
+    border-bottom: 1px solid black;
+}
+.subtotal-wrapper .bottom-title{
+    font-size: 18px;
+    font-weight: 700;
+}
+.change{
+    margin:6% 0%;
+}
+.HST-wrapper, .payment-total{
+    float:left;
+    width: 100%;
+}
+.payments-title{
+    width: 100%;
+    position:inherit;
+    float: none;
+    display: flex;
+}
+.payment-total{
+    display:block;
+}}
