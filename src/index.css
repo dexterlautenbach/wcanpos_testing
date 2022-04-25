@@ -244,6 +244,7 @@ td.prodName {
 }
 
 .productModal{
+    backdrop-filter: blur(10px)!important;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .modal{
