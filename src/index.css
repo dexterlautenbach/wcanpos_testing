@@ -246,7 +246,7 @@ td.prodName {
 .productModal{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-#staticBackdrop{
+.modal{
     backdrop-filter: blur(10px)!important;
     color:blue;
 }
