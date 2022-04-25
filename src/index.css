@@ -352,6 +352,10 @@ tr {
 .payment-total{
     display:block;
 }}
+.modal{
+    backdrop-filter: blur(150px)!important;
+}
+
 
 
 
