@@ -5,14 +5,14 @@ import StripeConfirm from "./stripeConfirm";
 
 
 
+
 class Stripe extends Component {
     state = {
         cashTender : 0.0,
     };
 
-    handleCashTender = (amount) =>{
-        amount = Number(amount);
-        this.setState({cashTender : amount});
+    componentDidMount() {
+
     }
 
 
@@ -22,6 +22,7 @@ class Stripe extends Component {
                 <div>
                     {this.props.stripe ?
                         <div>
+                            {window['stripeCheckout()']}
                             <div className="modal modal-dialog-centered cash-modal" id="staticBackdrop" data-bs-backdrop="static"
                                  data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel"
                                  aria-hidden="true">
@@ -31,8 +32,8 @@ class Stripe extends Component {
                                             handleStripe = {this.props.handleStripe}
                                             getTotalDue = {this.props.getTotalDue}
                                         />
-                                        <StripeBody
 
+                                        <StripeBody
                                         />
                                         <StripeConfirm
 
