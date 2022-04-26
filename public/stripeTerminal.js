@@ -1,5 +1,3 @@
-
-
 /** to create a stripe terminal, we must first get some information from the server */
 var terminal = StripeTerminal.create({
     onFetchConnectionToken: async () => {
@@ -48,6 +46,7 @@ function connectReader(discoverResult) {
     terminal.connectReader(selectedReader).then(function (connectResult) {
         if (connectResult.error) {
             console.log('Failed to connect: ', connectResult.error);
+            alert('unable to connect to payment terminal');
         } else {
             console.log('Connected to reader: ', connectResult.reader.label);
         }
@@ -57,7 +56,6 @@ function connectReader(discoverResult) {
 
 
 discoverReaders();
-
 
 
 /** TRY TO GET THE TERMINAL CONNECTION */
@@ -80,22 +78,22 @@ async function clientSecret() {
 
 //  clientSecret();
 
-async function stripeCheckout(message) {
-    console.log(message);
+async function stripeCheckout(totalDue) {
+
     const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_payment_intent?";
     const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
     const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
 
-    const url = apiSearch + consumerKey + "&" + secret;
+    const url = apiSearch + consumerKey + "&" + secret + "&totalDue=" + totalDue;
     const response = await fetch(url);
     const data = await response.json();
     console.log(data);
     // console.log(data.secret);
-    const clientSecret =  data.client_secret;
-   // const paymentIntent = data.piID;
+    const clientSecret = data.client_secret;
+    // const paymentIntent = data.piID;
 
     // clientSecret is the client_secret from the PaymentIntent you created in Step 1.
-    terminal.collectPaymentMethod(clientSecret).then(function(result) {
+    terminal.collectPaymentMethod(clientSecret).then(function (result) {
         if (result.error) {
             // Placeholder for handling result.error
             alert('we have an error on the payment method')
@@ -104,7 +102,7 @@ async function stripeCheckout(message) {
             console.log(result.paymentIntent)
 
             //process payment?????
-            terminal.processPayment(result.paymentIntent).then(function(result) {
+            terminal.processPayment(result.paymentIntent).then(function (result) {
                 if (result.error) {
                     // Placeholder for handling result.error
                     console.log(result.error)
@@ -115,7 +113,9 @@ async function stripeCheckout(message) {
                     alert('we paid');
 
                     /** Capture the payment by sending the payment intent ID back to the server         */
-                    capturePayment(result.paymentIntent.id);
+                   capturePayment(result.paymentIntent.id);
+
+                   return'fuck this';
 
                 }
             });
@@ -124,7 +124,9 @@ async function stripeCheckout(message) {
 
 }
 
-async function capturePayment (piID) {
+var stripeConfirmation = 'not ready';
+
+async function capturePayment(piID) {
     const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
     const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
 
@@ -133,7 +135,9 @@ async function capturePayment (piID) {
     const url2 = apiSearch + consumerKey + "&" + secret + '&piID=' + piID;
     const response2 = await fetch(url2);
     const data2 = await response2.json();
-    console.log(data2);
+    // console.log(data2);
+    stripeConfirmation = data2;
+    return data2;
 }
 
 
