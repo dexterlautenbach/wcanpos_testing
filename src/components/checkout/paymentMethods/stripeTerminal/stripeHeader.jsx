@@ -8,7 +8,7 @@ class StripeHeader extends Component {
         return (
             <div className="modal-header">
                 <div>
-                    <h4 className="modal-title" id="staticBackdropLabel">Payment Card - ${(Math.round(this.props.getTotalDue()*20)/20).toFixed(2)}</h4>
+                    <h4 className="modal-title" id="staticBackdropLabel">Payment Card - ${this.props.getTotalDue().toFixed(2)}</h4>
                 </div>
                 <div>
                     <button onClick={() => this.props.handleStripe(false)}

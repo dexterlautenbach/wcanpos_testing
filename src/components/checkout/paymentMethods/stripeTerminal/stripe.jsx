@@ -34,6 +34,7 @@ class Stripe extends Component {
                                         />
 
                                         <StripeBody
+                                            getTotalDue = {this.props.getTotalDue}
                                         />
                                         <StripeConfirm
 
