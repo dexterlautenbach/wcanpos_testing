@@ -248,7 +248,6 @@ td.prodName {
 }
 .modal{
     backdrop-filter: blur(10px)!important;
-    color:blue;
 }
 
 .cashQuickButtons{
@@ -364,3 +363,9 @@ tr {
 
 
 
+@media screen and (max-width: 1200px) {
+    .btn-prod, .btn-cat{font-size:14px;font-weight: 600;}
+    .modal-body .col-5 {width: 35% !important;}
+    label{width:25%;}
+    .accordion-body label{width:90%}
+}
