@@ -356,6 +356,10 @@ tr {
 .payment-total{
     display:block;
 }}
+.modal{
+    backdrop-filter: blur(150px)!important;
+}
+
 
 
 
@@ -363,4 +367,5 @@ tr {
     .btn-prod, .btn-cat{font-size:14px;font-weight: 600;}
     .modal-body .col-5 {width: 35% !important;}
     label{width:25%;}
+    .accordion-body label{width:90%}
 }
