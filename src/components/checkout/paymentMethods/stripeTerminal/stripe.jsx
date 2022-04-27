@@ -35,6 +35,9 @@ class Stripe extends Component {
 
                                         <StripeBody
                                             getTotalDue = {this.props.getTotalDue}
+                                            handleTendered = {this.props.handleTendered}
+                                            handlePaymentMethods = {this.props.handlePaymentMethods}
+                                            handleStripe = {this.props.handleStripe}
                                         />
                                         <StripeConfirm
 

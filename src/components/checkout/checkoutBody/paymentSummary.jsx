@@ -13,7 +13,7 @@ class PaymentSummary extends Component {
                     {this.props.paymenthMethods?.map(function(method, i) {
                       return  <div className="payment-method" key={i}>
                             <div className="payment-method-name">{method.name}</div>
-                            <div className="payment-method-value">{method.value.toFixed(2)}</div>
+                            <div className="payment-method-value">{Number(method.value).toFixed(2)}</div>
                         </div>
 
                     }

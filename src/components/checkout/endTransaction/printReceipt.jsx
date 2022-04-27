@@ -77,7 +77,20 @@ class PrintReceipt extends Component {
                         {this.props.paymentMethods?.map(function (method, i) {
                             return <div key={i} className="payment-method-wrapper">
                                 <div className='method-name'>{method.name}</div>
-                                <div className='method-value'>{method.value}</div>
+                                <div className='method-value'>${Number(method.value).toFixed(2)}</div>
+                                {(method.name !== 'cash') ?
+                                    <div className="CreditCardInfoWrapper">
+                                        <div className='method-name'>Card:</div>
+                                        <div className='method-value'>**** **** **** {method.last4}</div>
+                                        <div className='method-name'>Acc. Type:</div>
+                                        <div className='method-value'>{method.account_type}</div>
+                                        <div className='method-name'>App Name:</div>
+                                        <div className='method-value'>{method.application_preferred_name}</div>
+                                        <div className='method-name'>File Name:</div>
+                                        <div className='method-value'>{method.dedicated_file_name}</div>
+                                    </div>
+                                    :
+                                    ''}
                             </div>
                         })}
 
@@ -87,7 +100,7 @@ class PrintReceipt extends Component {
                         </div>
                         <div className="change">
                             <div className="change-title">Change Due</div>
-                            <div className="change-paid">${(this.props.getTotalDue()*-1).toFixed(2)}</div>
+                            <div className="change-paid">${(this.props.getTotalDue() * -1).toFixed(2)}</div>
                         </div>
 
                     </div>
@@ -105,7 +118,6 @@ class PrintReceipt extends Component {
             </div>
         )
     }
-
 
 
 }
