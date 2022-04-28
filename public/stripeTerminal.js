@@ -8,8 +8,8 @@ var terminal = StripeTerminal.create({
         const url = apiSearch + consumerKey + "&" + secret;
         const response = await fetch(url);
         const data = await response.json();
-       // console.log(data);
-       // console.log(data.secret);
+        // console.log(data);
+        // console.log(data.secret);
         return data.secret;
     },
     onUnexpectedReaderDisconnect: unexpectedDiscounnect,
@@ -21,7 +21,7 @@ function unexpectedDiscounnect() {
 }
 
 
-function discoverReaders() {
+function discoverReaders(terminalID) {
     const config = {simulated: false, location: 'tml_EmOigwn7me7ov0'}
     terminal.discoverReaders(config).then(function (discoverResult) {
         if (discoverResult.error) {
@@ -34,16 +34,28 @@ function discoverReaders() {
             // You should show the list of discoveredReaders to the
             // cashier here and let them select which to connect to (see below).
             //  console.log(discoverResult);
-            connectReader(discoverResult);
+            connectReader(discoverResult, terminalID);
         }
     });
 
 
 }
 
-function connectReader(discoverResult) {
+function connectReader(discoverResult, terminalID) {
     // Just select the first reader here.
-    var selectedReader = discoverResult.discoveredReaders[0];
+    terminalID = 'terminal ' + terminalID;
+    var selectedReader;
+    // console.log(discoverResult);
+
+    var arrayLength = discoverResult.discoveredReaders.length;
+    for (var i = 0; i < arrayLength; i++) {
+        //console.log(discoverResult.discoveredReaders[i]);
+        if (terminalID == discoverResult.discoveredReaders[i].label) {
+            selectedReader = discoverResult.discoveredReaders[i];
+        }
+
+    }
+    //var selectedReader = discoverResult.discoveredReaders[0];
 
     terminal.connectReader(selectedReader).then(function (connectResult) {
         if (connectResult.error) {
@@ -51,13 +63,15 @@ function connectReader(discoverResult) {
             alert('unable to connect to payment terminal. Please contact IT support');
         } else {
             // console.log('Connected to reader: ', connectResult.reader.label);
+            terminal.clearReaderDisplay();
+            alert("Connected to: " + terminalID);
         }
 
     });
 }
 
 
-discoverReaders();
+//discoverReaders();
 
 
 /** TRY TO GET THE TERMINAL CONNECTION */
@@ -139,6 +153,26 @@ async function capturePayment(piID) {
     stripeConfirmation = data2;
 
 }
+
+
+function stripeCartDisplay(cart, tax, subtotal) {
+    // const lineItems = stripeCartLineItems(cart);
+    terminal.setReaderDisplay({
+        type: 'cart',
+        cart: {
+            line_items: cart,
+            tax: Number(tax),
+            total: Number(subtotal),
+            currency: 'cad',
+        },
+    });
+}
+
+function clearStripeDisplay() {
+    terminal.clearReaderDisplay();
+}
+
+
 
 
 
