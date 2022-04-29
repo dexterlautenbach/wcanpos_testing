@@ -38,7 +38,8 @@ class ConnectToTerminal extends Component {
     }
 
     connectToTerminal = (terminalID) =>{
-        window.discoverReaders(terminalID);
+        const location = 'tml_EmOigwn7me7ov0';
+        window.discoverReaders(terminalID, location);
         this.setState({loading: false});
     }
 }

@@ -1,19 +1,19 @@
 /** to create a stripe terminal, we must first get some information from the server */
-var terminal = StripeTerminal.create({
-    onFetchConnectionToken: async () => {
-        const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_connection_token?";
-        const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
-        const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
 
-        const url = apiSearch + consumerKey + "&" + secret;
-        const response = await fetch(url);
-        const data = await response.json();
-        // console.log(data);
-        // console.log(data.secret);
-        return data.secret;
-    },
-    onUnexpectedReaderDisconnect: unexpectedDiscounnect,
-});
+var terminal;
+function initializeTerminal(url) {
+     terminal = StripeTerminal.create({
+        onFetchConnectionToken: async () => {
+
+            const response = await fetch(url);
+            const data = await response.json();
+            // console.log(data);
+            // console.log(data.secret);
+            return data.secret;
+        },
+        onUnexpectedReaderDisconnect: unexpectedDiscounnect,
+    });
+}
 
 function unexpectedDiscounnect() {
     console.log('shitty');
@@ -21,8 +21,8 @@ function unexpectedDiscounnect() {
 }
 
 
-function discoverReaders(terminalID) {
-    const config = {simulated: false, location: 'tml_EmOigwn7me7ov0'}
+function discoverReaders(terminalID, location) {
+    const config = {simulated: false, location: location}
     terminal.discoverReaders(config).then(function (discoverResult) {
         if (discoverResult.error) {
             console.log('Failed to discover: ', discoverResult.error);
@@ -79,14 +79,10 @@ function connectReader(discoverResult, terminalID) {
 var stripeConfirmation = 0;
 var paymentIntentID = 0;
 
-async function stripeCheckout(totalDue) {
+async function stripeCheckout(totalDue, url, url2) {
     stripeConfirmation = 0; //reset this for next payment
     paymentIntentID = 0; //reset this for next payment
-    const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_payment_intent?";
-    const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
-    const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
 
-    const url = apiSearch + consumerKey + "&" + secret + "&totalDue=" + totalDue;
     const response = await fetch(url);
     const data = await response.json();
     //console.log(data);
@@ -122,7 +118,7 @@ async function stripeCheckout(totalDue) {
                        // console.log('is array');
                         stripeConfirmation = result.paymentIntent;
                     } else {
-                        capturePayment(result.paymentIntent.id);
+                        capturePayment(result.paymentIntent.id, url2);
                        // console.log('is not array');
                     }
 
@@ -134,13 +130,9 @@ async function stripeCheckout(totalDue) {
 }
 
 
-async function capturePayment(piID) {
-    const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
-    const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
+async function capturePayment(piID, url2) {
 
-    const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_capture?";
-
-    const url2 = apiSearch + consumerKey + "&" + secret + '&piID=' + piID;
+    url2 = url2 + '&piID=' + piID;
     const response2 = await fetch(url2);
     const data2 = await response2.json();
     //  console.log(data2);
