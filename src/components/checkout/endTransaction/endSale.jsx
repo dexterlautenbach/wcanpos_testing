@@ -11,6 +11,7 @@ class EndSale extends Component {
      */
 
     updateWooOrder = () => {
+        this.setState({clicked:true});
         // POST request using fetch with set headers
         const requestOptions = {
             method: 'POST',
@@ -25,7 +26,7 @@ class EndSale extends Component {
             .then(response => response.json())
             .then((data) => {
                 if (data.id > 0) {
-                    console.log(data);
+                   // console.log(data);
                     this.props.handleNewOrderClick();
                    // this.props.handleNewOrderCheckout();
                 }
@@ -79,6 +80,10 @@ class EndSale extends Component {
         return (
             <div className="paymentOptions">
                 <button onClick={() => this.updateWooOrder()} className="btn-danger btn-lg cashButton">End Sale</button>
+                {this.state.clicked ?
+                    <div className="text-green h5">Processing.... </div>
+                    : ''
+                }
             </div>
         )
     }

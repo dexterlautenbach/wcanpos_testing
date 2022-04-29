@@ -73,7 +73,7 @@ class Checkout extends Component {
     componentDidUpdate() {
         if (this.props.clearCheckout === true){
             this.handleNewOrderCheckout()
-            console.log('cleared cart');
+            //console.log('cleared cart');
         };
 
     }

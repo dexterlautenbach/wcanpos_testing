@@ -36,7 +36,7 @@ class CashBody extends Component {
 
                 <NumPad.Number
                     onChange={(value) => {
-                        console.log('value', value);
+                       // console.log('value', value);
                         this.props.handleCashTender(value);
                         this.handleNumbPad(value);
                     }}

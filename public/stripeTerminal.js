@@ -17,7 +17,7 @@ var terminal = StripeTerminal.create({
 
 function unexpectedDiscounnect() {
     console.log('shitty');
-    alert("looks like the terminal has been discounted. Probably have to do a page refresh. I don't know. We are pretty untested here.");
+    alert("looks like the terminal has been disconnected. Probably have to do a page refresh. I don't know. We are pretty untested here.");
 }
 
 
@@ -76,27 +76,12 @@ function connectReader(discoverResult, terminalID) {
 
 /** TRY TO GET THE TERMINAL CONNECTION */
 
-
-async function clientSecret() {
-    const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_payment_intent?";
-    const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
-    const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
-
-    const url = apiSearch + consumerKey + "&" + secret;
-    const response = await fetch(url);
-    const data = await response.json();
-    // console.log(data);
-    // console.log(data.secret);
-    return data;
-
-
-}
-
-//  clientSecret();
 var stripeConfirmation = 0;
+var paymentIntentID = 0;
 
 async function stripeCheckout(totalDue) {
     stripeConfirmation = 0; //reset this for next payment
+    paymentIntentID = 0; //reset this for next payment
     const apiSearch = "https://test.wateringcanworkshops.com/wp-json/pos_bridge/v1/stripe_payment_intent?";
     const consumerKey = 'consumerKey=U59ws06BB0B00A2gL2saOx92o44w68R6ti1o26aquDYcT65b4728vcfYN7xA7XIifHenpr8qG6V0Cw76kJp7xsbeiHSdGUjxB2hUts74RGjBM3AHgm1HYb1xC4yg6k8yqo8nQN4QJa8aYvii1T0ot0VQ6nyDe0KARlvIv03Z84wO369LrY9V8Bm6v5L9N9fax0hJvj45';
     const secret = 'secret=VTE5eXq2zim496P6a82Y31x5xIUaI4reWI6dlKC5KZkDX7J1h3isK518yG6Ntngtt58lQcnIRxain39uK776pJ7QXR60600PX92RgmcSrFJ2s9getmfdB4mX4jo1HLjt850cyL139Q1eCBk3ZB5ZU5osmMjD6Ucl9mS0vjAilcf01p18f78aXM1oUa283dvkkf5Vi3c3';
@@ -104,16 +89,17 @@ async function stripeCheckout(totalDue) {
     const url = apiSearch + consumerKey + "&" + secret + "&totalDue=" + totalDue;
     const response = await fetch(url);
     const data = await response.json();
-    // console.log(data);
+    //console.log(data);
     // console.log(data.secret);
     const clientSecret = data.client_secret;
+    paymentIntentID = data.piID.id;
     // const paymentIntent = data.piID;
 
     // clientSecret is the client_secret from the PaymentIntent you created in Step 1.
     terminal.collectPaymentMethod(clientSecret).then(function (result) {
         if (result.error) {
             // Placeholder for handling result.error
-            alert('we have an error on the payment method')
+            alert('we have an error on the payment method. Please try again.')
         } else {
             // Placeholder for processing result.paymentIntent
             // console.log(result.paymentIntent)
@@ -126,11 +112,19 @@ async function stripeCheckout(totalDue) {
                     alert('Payment DID NOT go through');
                 } else if (result.paymentIntent) {
                     // Placeholder for notifying your backend to capture result.paymentIntent.id
-                    //  console.log(result.paymentIntent);
+                   // console.log(result.paymentIntent);
+                   // console.log(result.paymentIntent.charges.data[0].payment_method_details.interac_present);
                     // alert('we paid');
 
+                    //console.log(Array.isArray(result.paymentIntent.charges.data[0].payment_method_details.interac_present);
                     /** Capture the payment by sending the payment intent ID back to the server         */
-                    capturePayment(result.paymentIntent.id);
+                    if (typeof result.paymentIntent.charges.data[0].payment_method_details.interac_present != "undefined") {
+                       // console.log('is array');
+                        stripeConfirmation = result.paymentIntent;
+                    } else {
+                        capturePayment(result.paymentIntent.id);
+                       // console.log('is not array');
+                    }
 
                 }
             });
@@ -169,7 +163,19 @@ function stripeCartDisplay(cart, tax, subtotal) {
 }
 
 function clearStripeDisplay() {
-    terminal.clearReaderDisplay();
+    terminal.cancelCollectPaymentMethod().then(function (result) {
+        if (result.error) {
+            // Placeholder for handling result.error
+            console.log(result.error)
+            alert('Cancel failed. Restart?');
+        } else {
+          //  console.log(result);
+        }
+    });
+}
+
+function clearStripeCartDisplay () {
+    terminal.clearReaderDisplay()
 }
 
 

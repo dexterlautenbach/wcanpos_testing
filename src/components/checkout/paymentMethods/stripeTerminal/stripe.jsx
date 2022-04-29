@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import StripeHeader from "./stripeHeader";
 import StripeBody from "./stripeBody";
-import StripeConfirm from "./stripeConfirm";
+import StripeCancel from "./stripeCancelPayment";
 
 
 
@@ -9,12 +9,12 @@ import StripeConfirm from "./stripeConfirm";
 class Stripe extends Component {
     state = {
         cashTender : 0.0,
+        stopInterval : false,
     };
 
-    componentDidMount() {
-
-    }
-
+handleStopInterval = (x) =>{
+    this.setState({stopInterval : x});
+}
 
     render() {
         return (
@@ -38,9 +38,13 @@ class Stripe extends Component {
                                             handleTendered = {this.props.handleTendered}
                                             handlePaymentMethods = {this.props.handlePaymentMethods}
                                             handleStripe = {this.props.handleStripe}
+                                            stripe = {this.props.stripe}
+                                            handleStopInterval = {this.handleStopInterval}
+                                            stopInterval = {this.state.stopInterval}
                                         />
-                                        <StripeConfirm
-
+                                        <StripeCancel
+                                            handleStripe = {this.props.handleStripe}
+                                            handleStopInterval = {this.handleStopInterval}
                                         />
                                     </div>
                                 </div>

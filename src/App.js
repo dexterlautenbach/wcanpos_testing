@@ -15,8 +15,6 @@ class App extends Component {
         cart: [],
         checkout: false,
         clearCheckout: false,
-
-
     }
 
     //need to set the product list from the all products component
@@ -97,7 +95,7 @@ class App extends Component {
         this.setState({updateSelectedProduct: false});
         this.setState({clearCheckout: true});
 
-        window.clearStripeDisplay();
+        window.clearStripeCartDisplay();
 
     }
 
@@ -122,6 +120,7 @@ class App extends Component {
         const tax = this.stripeCartTax();
         window.stripeCartDisplay(lineItems, tax, subTotal);
     }
+
 
     render() {
         return (
