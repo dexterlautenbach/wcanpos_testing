@@ -78,10 +78,14 @@ function connectReader(discoverResult, terminalID) {
 
 var stripeConfirmation = 0;
 var paymentIntentID = 0;
+var paymentError = false;
+var errorCode = 0;
 
 async function stripeCheckout(totalDue, url, url2) {
     stripeConfirmation = 0; //reset this for next payment
     paymentIntentID = 0; //reset this for next payment
+    paymentError = false;
+    errorCode = 0;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -106,6 +110,8 @@ async function stripeCheckout(totalDue, url, url2) {
                     // Placeholder for handling result.error
                     console.log(result.error)
                     alert('Payment DID NOT go through');
+                    paymentError = true;
+                    errorCode = result.error;
                 } else if (result.paymentIntent) {
                     // Placeholder for notifying your backend to capture result.paymentIntent.id
                    // console.log(result.paymentIntent);

@@ -44,6 +44,7 @@ class EndSale extends Component {
             line_items: lineItems,
             status: 'completed',
             meta_data: metaData,
+            customer_id: 1131,
         };
 
     }

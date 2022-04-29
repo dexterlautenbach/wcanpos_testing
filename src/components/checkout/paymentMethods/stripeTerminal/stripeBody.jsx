@@ -1,10 +1,10 @@
 import React, {Component} from "react";
+import PaymentFailed from "./paymentFailed";
+
 
 
 class StripeBody extends Component {
-    state = {
-
-    };
+    state = {};
 
     componentDidMount() {
         this.props.handleStopInterval(false);
@@ -26,13 +26,17 @@ class StripeBody extends Component {
         const that = this;
 
         const interval = setInterval(function () {
-           // console.log('still going');
-            if (that.props.stopInterval === true){
+            //console.log('still going');
+            if (that.props.stopInterval === true) {
                 clearInterval(interval);
+            }
+            if (window.paymentError === true) {
+                clearInterval(interval);
+                that.setState({paymentFailed: true})
             }
             if (window.stripeConfirmation == 0) {
             } else {
-             //   console.log(window.stripeConfirmation);
+                //   console.log(window.stripeConfirmation);
                 clearInterval(interval);
                 that.handleStripeConfirmation();
             }
@@ -47,7 +51,7 @@ class StripeBody extends Component {
 
     handleStripeConfirmation = () => {
         const stripeConfirmation = window.stripeConfirmation;
-     //   console.log(stripeConfirmation);
+        //   console.log(stripeConfirmation);
         let paymentMethod;
         /** Need to test for interact users */
         if (typeof stripeConfirmation.charges.data[0].payment_method_details.interac_present != "undefined") {
@@ -57,7 +61,7 @@ class StripeBody extends Component {
                 const stripeTendered = Number(stripeConfirmation.charges.data[0].amount) / 100;
                 this.props.handleTendered(stripeTendered);
                 paymentMethod = {
-                    name: stripeConfirmation.charges.data[0].payment_method_details.interac_present.brand,
+                    name: 'Interac',
                     value: stripeTendered,
                     change: 0,
                     cashAdjustment: 0,
@@ -87,11 +91,26 @@ class StripeBody extends Component {
         this.props.handleStripe(false);
     }
 
+    handlePaymentFailedComplete = () =>{
+        this.setState({paymentFailed : false})
+        this.props.handleStripe(false);
+    }
+
+
 
     render() {
         return (
-            <div className="modal-body h4">
-                Pass terminal to Customer
+            <div className="wrapper">
+                <div className="modal-body h4">
+                    Pass terminal to Customer
+                </div>
+                {this.state.paymentFailed ?
+                <PaymentFailed
+                    handlePaymentFailedComplete = {this.handlePaymentFailedComplete}
+                />
+
+                : ''}
+
             </div>
         )
     }
