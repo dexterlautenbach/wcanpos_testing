@@ -28,10 +28,10 @@ handleStopInterval = (x) =>{
                                  aria-hidden="true">
                                 <div className="modal-dialog productModal">
                                     <div className="modal-content">
-                                        <StripeHeader
-                                            handleStripe = {this.props.handleStripe}
-                                            getTotalDue = {this.props.getTotalDue}
-                                        />
+                                        {/*<StripeHeader*/}
+                                        {/*    handleStripe = {this.props.handleStripe}*/}
+                                        {/*    getTotalDue = {this.props.getTotalDue}*/}
+                                        {/*/>*/}
 
                                         <StripeBody
                                             getTotalDue = {this.props.getTotalDue}
