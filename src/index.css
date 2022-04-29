@@ -151,9 +151,10 @@ code {
 label {
     display: inline-grid !important;
 }
-.title h4{
-    font-size:18px;
-    margin-top:8px;
+
+.title h4 {
+    font-size: 18px;
+    margin-top: 8px;
 }
 
 #price, #quantity, #discount {
@@ -214,22 +215,26 @@ td.prodName {
 .payment-summary {
     min-width: 100%;
     min-height: 200px;
-    padding:8px;
+    padding: 8px;
 }
-.payment-method{
-    border-bottom:1px solid grey;
+
+.payment-method {
+    border-bottom: 1px solid grey;
     padding: 5px;
 }
-.payment-method-value{
+
+.payment-method-value {
     font-weight: 700;
-    width:50%;
+    width: 50%;
     float: right;
     text-align: right;
 }
-.payment-method-name{
+
+.payment-method-name {
     width: 49%;
     display: contents;
 }
+
 .col-5 {
     width: 43% !important;
 }
@@ -243,17 +248,19 @@ td.prodName {
     border-bottom: 1px solid black
 }
 
-.productModal{
+.productModal {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-.modal{
-    backdrop-filter: blur(10px)!important;
+
+.modal {
+    backdrop-filter: blur(10px) !important;
 }
 
-.cashQuickButtons{
+.cashQuickButtons {
     width: 50%;
     float: left;
 }
+
 .cashButton {
     padding: 15px;
     margin: 5px;
@@ -261,111 +268,146 @@ td.prodName {
     background: #2a3c59;
     border: 0px;
 }
+
 .btn-success {
-    background: green!important;
-    float:right;
-}
-h3{
-    font-size: 20px!important;
+    background: green !important;
+    float: right;
 }
 
-.wrapper{
-    width:100%;
-    max-width:100%;
+h3 {
+    font-size: 20px !important;
 }
+
+.wrapper {
+    width: 100%;
+    max-width: 100%;
+}
+
 @media print {
-    .logo-div{
-        text-align: center!important;
+    .logo-div {
+        text-align: center !important;
         width: 100%;
-        display:flex;
+        display: flex;
     }
-    body{
+
+    body {
         width: 100%;
         padding: 5%;;
         height: initial !important;
         overflow: initial !important;
         -webkit-print-color-adjust: exact;
     }
-    .twc-logo{
-        text-align: center!important;
-        width:100%;
+
+    .twc-logo {
+        text-align: center !important;
+        width: 100%;
         padding-left: 20%;
-        padding-right:20%;
+        padding-right: 20%;
         padding-bottom: 3%;
         display: block;
     }
-    .company-info{
+
+    .company-info {
         text-align: center;
     }
-    .info-info, .bottom-info, .payment-total, .total-paid, .change-paid{
+
+    .info-info, .bottom-info, .payment-total, .total-paid, .change-paid {
         width: 50%;
         float: right;
         text-align: right;
     }
+
     .info-title, .bottom-title, .total-title, .change-title {
         width: 50%;
         float: left;
     }
-    .receipt-footer{
+
+    .receipt-footer {
         text-align: center;
     }
+
     .product-table-header {
         border-bottom: 1px solid black;
-        margin-top:25px;
+        margin-top: 25px;
     }
 
 
-.bottom-title, .method-name, .total-title, .change-title {
-    width: 50%;
-    float: left;
-    text-align: left;
-}
-.bottom-info, .method-value, .total-paid, .change-paid{
-    width: 50%;
-    float: right;
-    text-align: right;
-}
-.payments-title, .change{
-    font-size:18px;
-    font-weight: 700;
-    text-align: left;
-}
-.subtotal-wrapper{
-    border-top: 1px solid black;
-}
-tr {
-    border-bottom: 1px solid black;
-}
-.subtotal-wrapper .bottom-title{
-    font-size: 18px;
-    font-weight: 700;
-}
-.change{
-    margin:6% 0%;
-}
-.HST-wrapper, .payment-total{
-    float:left;
-    width: 100%;
-}
-.payments-title{
-    width: 100%;
-    position:inherit;
-    float: none;
-    display: flex;
-}
-.payment-total{
-    display:block;
-}}
-.modal{
-    backdrop-filter: blur(150px)!important;
+    .bottom-title, .method-name, .total-title, .change-title {
+        width: 50%;
+        float: left;
+        text-align: left;
+    }
+
+    .bottom-info, .method-value, .total-paid, .change-paid {
+        width: 50%;
+        float: right;
+        text-align: right;
+    }
+
+    .payments-title, .change {
+        font-size: 18px;
+        font-weight: 700;
+        text-align: left;
+    }
+
+    .subtotal-wrapper {
+        border-top: 1px solid black;
+    }
+
+    tr {
+        border-bottom: 1px solid black;
+    }
+
+    .subtotal-wrapper .bottom-title {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .change {
+        margin: 6% 0%;
+    }
+
+    .HST-wrapper, .payment-total {
+        float: left;
+        width: 100%;
+    }
+
+    .payments-title {
+        width: 100%;
+        position: inherit;
+        float: none;
+        display: flex;
+    }
+
+    .payment-total {
+        display: block;
+    }
+
+    .payment-separator {
+        border-top: 1px solid black;
+    }
 }
 
-
+.modal {
+    backdrop-filter: blur(150px) !important;
+}
 
 
 @media screen and (max-width: 1200px) {
-    .btn-prod, .btn-cat{font-size:14px;font-weight: 600;}
-    .modal-body .col-5 {width: 35% !important;}
-    label{width:25%;}
-    .accordion-body label{width:90%}
+    .btn-prod, .btn-cat {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .modal-body .col-5 {
+        width: 35% !important;
+    }
+
+    label {
+        width: 25%;
+    }
+
+    .accordion-body label {
+        width: 90%
+    }
 }
