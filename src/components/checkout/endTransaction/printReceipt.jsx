@@ -119,7 +119,7 @@ class PrintReceipt extends Component {
         )
     }
 
-
+//hi
 }
 
 export default PrintReceipt;
