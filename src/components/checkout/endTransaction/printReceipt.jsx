@@ -77,8 +77,8 @@ class PrintReceipt extends Component {
                         {this.props.paymentMethods?.map(function (method, i) {
                             return <div key={i} className="payment-method-wrapper">
                                 <div className='method-name payment-separator'>{method.name}</div>
-                                <div className='method-value'>${Number(method.value).toFixed(2)}</div>
-                                {(method.name !== 'cash') ?
+                                <div className='method-value payment-separator'>${Number(method.value).toFixed(2)}</div>
+                                {(method.name !== 'Cash') ?
                                     <div className="CreditCardInfoWrapper">
                                         <div className='method-name'>Card:</div>
                                         <div className='method-value'>**** **** **** {method.last4}</div>
