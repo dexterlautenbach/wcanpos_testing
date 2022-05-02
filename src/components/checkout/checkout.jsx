@@ -64,17 +64,18 @@ class Checkout extends Component {
     }
 
     handleNewOrderCheckout = () => {
-        this.setState({paymentMethods : []});
-        this.setState({tendered : 0});
-        this.setState({orderID : 0});
+        this.setState({paymentMethods: []});
+        this.setState({tendered: 0});
+        this.setState({orderID: 0});
         this.props.resetClearCheckout();
     }
 
     componentDidUpdate() {
-        if (this.props.clearCheckout === true){
+        if (this.props.clearCheckout === true) {
             this.handleNewOrderCheckout()
             //console.log('cleared cart');
-        };
+        }
+        ;
 
     }
 
@@ -118,27 +119,46 @@ class Checkout extends Component {
         );
     }
 
-    testForTotalDue = () =>{
-        const totalDue = Number(this.getTotalDue()).toFixed(2);
+    testForTotalDue = () => {
+        const paymentMethods = this.state.paymentMethods;
+        let totalDue;
+        if (paymentMethods.length > 0) { //test for any payment methods
+            const paymentMethodsLength = paymentMethods.length;
+            const lastPayment = paymentMethods[paymentMethodsLength - 1];
+          //  console.log(lastPayment);
+            if (lastPayment.name == "Cash") { //test to see if last payment method was cash and if we need to round down the total due
+               // console.log('yes it is');
+                totalDue = Number(this.getTotalDue()).toFixed(2);
+                totalDue = (Math.round(totalDue*20)/20).toFixed(2);
+            } else {
+            //    console.log('not it is not');
+                totalDue = Number(this.getTotalDue()).toFixed(2);
+            }
+        } else {
+             totalDue = Number(this.getTotalDue()).toFixed(2);
+        }
+        //const totalDue = Number(this.getTotalDue()).toFixed(2);
         const actions = totalDue > 0 ?
             <PaymentMethods
                 getTotalDue={this.getTotalDue}
                 handleTendered={this.handleTendered}
                 handlePaymentMethods={this.handlePaymentMethods}
             />
-         :
+            :
             <EndTransaction
-                cartList = {this.props.cartList}
-                orderID = {this.state.orderID}
-                setorderID = {this.handleOrderCreation}
-                paymentMethods = {this.state.paymentMethods}
-                handleNewOrderClick = {this.props.handleNewOrderClick}
-                handleNewOrderCheckout = {this.handleNewOrderCheckout}
-                getSubtotal = {this.getSubtotal}
-                getHST = {this.getHST}
-                getTotal = {this.getTotal}
-                getTotalDue = {this.getTotalDue}
-                amountTendered = {this.state.tendered}
+                cartList={this.props.cartList}
+                orderID={this.state.orderID}
+                setorderID={this.handleOrderCreation}
+                paymentMethods={this.state.paymentMethods}
+                handleNewOrderClick={this.props.handleNewOrderClick}
+                handleNewOrderCheckout={this.handleNewOrderCheckout}
+                getSubtotal={this.getSubtotal}
+                getHST={this.getHST}
+                getTotal={this.getTotal}
+                getTotalDue={this.getTotalDue}
+                amountTendered={this.state.tendered}
+                setWooOrder={this.props.setWooOrder}
+                wooOrder={this.props.wooOrder}
             />
 
         ;

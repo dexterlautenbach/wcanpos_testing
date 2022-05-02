@@ -121,7 +121,7 @@ async function stripeCheckout(totalDue, url, url2) {
                     //console.log(Array.isArray(result.paymentIntent.charges.data[0].payment_method_details.interac_present);
                     /** Capture the payment by sending the payment intent ID back to the server         */
                     if (typeof result.paymentIntent.charges.data[0].payment_method_details.interac_present != "undefined") {
-                       // console.log('is array');
+                      //  console.log(result.paymentIntent);
                         stripeConfirmation = result.paymentIntent;
                     } else {
                         capturePayment(result.paymentIntent.id, url2);

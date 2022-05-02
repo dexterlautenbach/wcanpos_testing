@@ -15,6 +15,7 @@ class App extends Component {
         cart: [],
         checkout: false,
         clearCheckout: false,
+        wooOrder: 0,
     }
 
     componentDidMount() { //need to initialize the stripe terminal
@@ -130,6 +131,10 @@ class App extends Component {
         window.stripeCartDisplay(lineItems, tax, subTotal);
     }
 
+    setWooOrder = (order) =>{
+        this.setState({wooOrder: order});
+    }
+
 
     render() {
         return (
@@ -157,6 +162,8 @@ class App extends Component {
                     handleNewOrderClick={this.handleNewOrderClick}
                     clearCheckout={this.state.clearCheckout}
                     resetClearCheckout={this.resetClearCheckout}
+                    setWooOrder = {this.setWooOrder}
+                    wooOrder = {this.state.wooOrder}
                 />
                 <div className="pos-main">
                     <Cart

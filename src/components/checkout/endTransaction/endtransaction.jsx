@@ -30,7 +30,8 @@ class EndTransaction extends Component {
         fetch('https://test.wateringcanworkshops.com/wp-json/wc/v3/orders?consumer_key=ck_181949d267953fb08db6575c5aefcc09b6592080&consumer_secret=cs_4c327415a7ad72aafd384f806ca35b3a932d35f7', requestOptions)
             .then(response => response.json())
             .then((data) => {
-                this.setState({order: data});
+               // this.setState({order: data});
+                this.props.setWooOrder(data); // function comes from app.js
                 this.props.setorderID(data.id);
             });
     }
@@ -59,6 +60,7 @@ class EndTransaction extends Component {
                                   getTotalDue = {this.props.getTotalDue}
                                   paymentMethods={this.props.paymentMethods}
                                   amountTendered = {this.props.amountTendered}
+                                  wooOrder = {this.props.wooOrder}
                     />
                     </div>
 

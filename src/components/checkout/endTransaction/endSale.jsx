@@ -26,7 +26,7 @@ class EndSale extends Component {
             .then(response => response.json())
             .then((data) => {
                 if (data.id > 0) {
-                   // console.log(data);
+                  //  console.log(data);
                     this.props.handleNewOrderClick();
                    // this.props.handleNewOrderCheckout();
                 }
@@ -51,12 +51,18 @@ class EndSale extends Component {
 
     getLineItems = () => {
         let items = []
-        this.props.cartList?.map(item =>
+        this.props.cartList?.map(item => {
+            const itemTotal = item.price * item.quantity;
+            const itemTotalFormated = '"' + itemTotal + '"';
+            console.log(item.price);
+            console.log(item.quantity);
+            console.log(itemTotal);
             items.push({
                 product_id: item.id,
-                quantity: item.quantity
-            })
-        )
+                quantity: item.quantity,
+                total: itemTotalFormated,
+            });
+        })
         return items;
     }
 
