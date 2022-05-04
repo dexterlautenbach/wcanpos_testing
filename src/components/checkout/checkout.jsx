@@ -9,6 +9,7 @@ class Checkout extends Component {
     state = {
         tendered: 0,
         paymentMethods: [],
+        endSale : true,
         // orderID: 123456789,
     };
 
@@ -79,6 +80,10 @@ class Checkout extends Component {
 
     }
 
+    handleTerminateExit = (x) => {
+        this.setState({endSale: x})
+    }
+
 
     render() {
         return (
@@ -93,6 +98,7 @@ class Checkout extends Component {
                                     <div className="modal-content">
                                         <CheckoutHeader
                                             handleCheckoutClick={this.props.handleCheckoutClick}
+                                            endSale = {this.state.endSale}
                                         />
                                         <CheckoutBody
                                             cartList={this.props.cartList}
@@ -159,6 +165,7 @@ class Checkout extends Component {
                 amountTendered={this.state.tendered}
                 setWooOrder={this.props.setWooOrder}
                 wooOrder={this.props.wooOrder}
+                handleTerminateExit = {this.handleTerminateExit}
             />
 
         ;

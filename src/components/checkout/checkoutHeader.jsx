@@ -11,11 +11,14 @@ class CheckoutHeader extends Component {
                     <h5 className="modal-title" id="staticBackdropLabel">Checkout Time:</h5>
                 </div>
                 <div>
-                    <button onClick={this.props.handleCheckoutClick}
-                            className="btn-danger">Exit
-                    </button>
+                    {this.props.endSale ?
+                        <button onClick={this.props.handleCheckoutClick}
+                                className="btn-danger">Exit
+                        </button>
+                        : ''}
                 </div>
             </div>
+
         )
     }
 

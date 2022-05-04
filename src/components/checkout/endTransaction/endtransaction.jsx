@@ -70,6 +70,7 @@ class EndTransaction extends Component {
                         paymentMethods={this.props.paymentMethods}
                         handleNewOrderClick={this.props.handleNewOrderClick}
                         handleNewOrderCheckout={this.props.handleNewOrderCheckout}
+                        handleTemrinateExit = {this.props.handleTerminateExit}
                     />
                 </div>;
         } else {
