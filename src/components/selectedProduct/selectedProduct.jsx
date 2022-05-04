@@ -46,7 +46,7 @@ class SelectedProducts extends Component {
             this.setState({price: data.price});
             this.setState({loading: true});
             this.setState({updateProduct: false});
-          //  console.log('yes'); :)
+          //  console.log('yes'); :))
         }
 
 
