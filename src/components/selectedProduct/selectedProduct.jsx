@@ -76,6 +76,7 @@ class SelectedProducts extends Component {
                                             handlePriceChange={this.handlePriceChange}
                                             handleQtyChange={this.handleQtyChange}
                                             handleDiscountChange={this.handleDiscountChange}
+                                            handleAddItem = {this.handleAddItem}
                                         />
                                         <AddItem
                                             handleAddItem = {this.handleAddItem}

@@ -17,6 +17,7 @@ class ProductBody extends Component {
                     handlePriceChange = {this.props.handlePriceChange}
                     handleQtyChange = {this.props.handleQtyChange}
                     handleDiscountChange = {this.props.handleDiscountChange}
+                    handleAddItem = {this.props.handleAddItem}
                 />
 
                 <Accordion
